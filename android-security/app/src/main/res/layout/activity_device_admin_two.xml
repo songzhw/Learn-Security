@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<Button android:text="启用管理" android:layout_height="wrap_content"
+		android:id="@+id/enable_admin" android:layout_width="wrap_content"></Button>
+	<Button android:text="停用管理" android:id="@+id/disable_admin"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+	<EditText android:id="@+id/et_time_out" android:hint="屏幕光亮时间(秒)"
+		android:layout_height="wrap_content" android:layout_width="match_parent"></EditText>
+	<Button android:text="设置光亮间隔" android:id="@+id/time_out"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+	<Button android:text="锁屏" android:id="@+id/force_lock"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+	<Button android:text="恢复出厂设置" android:id="@+id/reset"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+</LinearLayout>

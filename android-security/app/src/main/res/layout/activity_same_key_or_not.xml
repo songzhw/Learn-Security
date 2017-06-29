@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <Button android:id="@+id/btnSameKeyOrNot1" android:layout_width="fill_parent" android:layout_height="60dp" android:textAllCaps="false"
+             android:onClick="genSaveKey" android:text="generate and save key"/>
+    <Button android:id="@+id/btnSameKeyOrNot2" android:layout_width="fill_parent" android:layout_height="60dp" android:textAllCaps="false"
+             android:onClick="loadKey" android:text="load key"/>
+
+    <Button android:id="@+id/btnSameKeyOrNot3" android:layout_width="fill_parent" android:layout_height="60dp" android:textAllCaps="false"
+            android:onClick="showKeys" android:text="show keys"/>
+
+    <TextView android:id="@+id/tvSameKeyOrNot" android:layout_width="fill_parent" android:layout_height="wrap_content"
+              android:textSize="30dp" tools:text="test" android:textColor="#000" android:layout_margin="10dp"/>
+
+</LinearLayout>
