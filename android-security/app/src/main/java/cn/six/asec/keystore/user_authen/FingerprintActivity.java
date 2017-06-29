@@ -189,7 +189,7 @@ public class FingerprintActivity extends Activity {
     }
 
     private void generateKey() throws NoSuchProviderException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, IOException, CertificateException {
-        // Use AES algorithm. Here we must use AndroidKeyStore for provider.
+        // Use SimpleAES algorithm. Here we must use AndroidKeyStore for provider.
         final KeyGenerator keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore");
         // Reload our keystore
         keyStore.load(null);

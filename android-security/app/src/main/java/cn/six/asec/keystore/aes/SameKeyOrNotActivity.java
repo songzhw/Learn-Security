@@ -80,11 +80,11 @@ public class SameKeyOrNotActivity extends Activity {
             Log.d("szw", "04-02 encrypted = " + new String(ret));
 
 
-            // java.security.NoSuchAlgorithmException: KeyFactory AES implementation not found
+            // java.security.NoSuchAlgorithmException: KeyFactory SimpleAES implementation not found
 //            // KeyFactory kf = KeyFactory.getInstance(key.getAlgorithm(), "AndroidKeyStore");
 //            SecretKeyFactory kf = SecretKeyFactory.getInstance(key.getAlgorithm(), "AndroidKeyStore");
 //            KeyInfo keyInfo = (KeyInfo) kf.getKeySpec(key, KeyInfo.class);
-//            Log.d("szw", "[AES] secretKey.isInHardware = " + keyInfo.isInsideSecureHardware() ); //=> true
+//            Log.d("szw", "[SimpleAES] secretKey.isInHardware = " + keyInfo.isInsideSecureHardware() ); //=> true
 
         } catch (Exception e) {
             e.printStackTrace();

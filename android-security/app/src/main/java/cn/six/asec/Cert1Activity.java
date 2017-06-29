@@ -15,7 +15,6 @@ public class Cert1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cert_one);
 
-
         try {
             BufferedInputStream bis = new BufferedInputStream( getAssets().open("test12.p12"));
             byte[] keychainBytes = new byte[bis.available()];
@@ -29,6 +28,7 @@ public class Cert1Activity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
