@@ -24,7 +24,7 @@ import javax.crypto.spec.SecretKeySpec;
  */
 
 public class CBC5AES {
-    private static final String HASH_ALGORITHM = "SHA-256";
+    private static final String HASH_ALGORITHM = "MD5";
 
     private SecretKey getKey(String password) throws Exception {
 //        SecretKey key = KeyGenerator.getInstance("AES").generateKey();
@@ -35,7 +35,7 @@ public class CBC5AES {
         digest.update(bytes, 0, bytes.length);
         byte[] key = digest.digest();
 
-        return new SecretKeySpec(password.getBytes("UTF-8"), "AES");
+        return new SecretKeySpec(key, "AES");
     }
 
     private IvParameterSpec getIv() {
