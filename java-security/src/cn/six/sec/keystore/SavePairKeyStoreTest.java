@@ -1,7 +1,7 @@
 package cn.six.sec.keystore;
 
 import cn.six.sec.Util;
-import sun.security.x509.CertAndKeyGen;
+import sun.security.tools.keytool.CertAndKeyGen;
 import sun.security.x509.X500Name;
 
 import java.io.File;
