@@ -3,6 +3,7 @@ package cn.six.sec.cipher;
 import cn.six.sec.Base64;
 
 import java.security.Key;
+import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.security.spec.KeySpec;
 
@@ -12,6 +13,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  Other things to keep in mind:
@@ -22,18 +24,18 @@ import javax.crypto.spec.PBEKeySpec;
  */
 
 public class CBC5AES {
+    private static final String HASH_ALGORITHM = "SHA-256";
 
     private SecretKey getKey(String password) throws Exception {
-        SecretKey key = KeyGenerator.getInstance("AES").generateKey();
-        return key;
+//        SecretKey key = KeyGenerator.getInstance("AES").generateKey();
+//        return key;
 
-//        SecureRandom random = new SecureRandom();
-//        byte[] salt = new byte[16];
-//        random.nextBytes(salt);
-//
-//        KeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, 65536, 256); // AES256
-//        SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-//        return secretKeyFactory.generateSecret(keySpec);
+        final MessageDigest digest = MessageDigest.getInstance(HASH_ALGORITHM);
+        byte[] bytes = password.getBytes("UTF-8");
+        digest.update(bytes, 0, bytes.length);
+        byte[] key = digest.digest();
+
+        return new SecretKeySpec(password.getBytes("UTF-8"), "AES");
     }
 
     private IvParameterSpec getIv() {
