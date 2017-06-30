@@ -7,6 +7,7 @@ import java.security.SecureRandom;
 import java.security.spec.KeySpec;
 
 import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
@@ -23,19 +24,23 @@ import javax.crypto.spec.PBEKeySpec;
 public class CBC5AES {
 
     private SecretKey getKey(String password) throws Exception {
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
+        SecretKey key = KeyGenerator.getInstance("AES").generateKey();
+        return key;
 
-        KeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, 65536, 256); // AES256
-        SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-        return secretKeyFactory.generateSecret(keySpec);
+//        SecureRandom random = new SecureRandom();
+//        byte[] salt = new byte[16];
+//        random.nextBytes(salt);
+//
+//        KeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, 65536, 256); // AES256
+//        SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+//        return secretKeyFactory.generateSecret(keySpec);
     }
 
     private IvParameterSpec getIv() {
         SecureRandom random = new SecureRandom();
         byte[] ivBytes = new byte[16];
         random.nextBytes(ivBytes);
+//        byte[] ivBytes = "1234567890abcdef".getBytes();
         return new IvParameterSpec(ivBytes);
     }
 
