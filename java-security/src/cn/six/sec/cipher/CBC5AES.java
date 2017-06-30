@@ -24,30 +24,33 @@ import javax.crypto.spec.SecretKeySpec;
  */
 
 public class CBC5AES {
-    private static final String HASH_ALGORITHM = "SHA-128";
+    private SecretKey key;
+    private IvParameterSpec iv;
 
+    // 因为用了md5, 所以多次调用getKey()， 生成的SecretKey是一样能用的！
     private SecretKey getKey(String password) throws Exception {
-//        SecretKey key = KeyGenerator.getInstance("AES").generateKey();
-//        return key;
-
-        final MessageDigest digest = MessageDigest.getInstance(HASH_ALGORITHM);
+        // convert the password to 128 bit size
+        final MessageDigest digest = MessageDigest.getInstance("MD5");
         byte[] bytes = password.getBytes("UTF-8");
         digest.update(bytes, 0, bytes.length);
-        byte[] key = digest.digest();
+        byte[] rawKey = digest.digest();
 
-        return new SecretKeySpec(key, "AES");
+        SecretKeySpec key = new SecretKeySpec(rawKey, "AES");
+        return key;
     }
 
     private IvParameterSpec getIv() {
-        SecureRandom random = new SecureRandom();
-        byte[] ivBytes = new byte[16];
-        random.nextBytes(ivBytes);
-//        byte[] ivBytes = "1234567890abcdef".getBytes();
-        return new IvParameterSpec(ivBytes);
+        if(iv == null) {
+            SecureRandom random = new SecureRandom();
+            byte[] ivBytes = new byte[16];
+            random.nextBytes(ivBytes);
+            iv = new IvParameterSpec(ivBytes);
+        }
+        return iv;
     }
 
     public String encrypt(String password, String data) throws Exception {
-        Key key = getKey(password);
+        SecretKey key = getKey(password);
         IvParameterSpec iv = getIv();
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, key, iv);
@@ -56,7 +59,7 @@ public class CBC5AES {
     }
 
     public String decrypt(String password, String cipherText) throws Exception {
-        Key key = getKey(password);
+        SecretKey key = getKey(password);
         IvParameterSpec iv = getIv();
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         cipher.init(Cipher.DECRYPT_MODE, key, iv);
@@ -73,3 +76,4 @@ public class CBC5AES {
         System.out.println("szw 02 = " + plain);
     }
 }
+
