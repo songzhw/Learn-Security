@@ -5,6 +5,7 @@ package ca.six.sec;
  */
 public class Util {
 
+    @Deprecated
     public static String bytesToHexString(byte[] data){
         StringBuffer buf = new StringBuffer();
         for (int i = 0; i < data.length; i++) {
@@ -21,13 +22,13 @@ public class Util {
         return buf.toString();
     }
 
-
-    public static void main(String[] args) {
-        System.out.println("result = " +Util.bytesToHexString(new byte[]{127}));
-//        111 halfbyte = 7
-//        222 halfbyte = 15
-//        222 halfbyte = 15
-//        result = 7F
+    public static byte[] hexStringToBytes(String raw) {
+        int len = raw.length();
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(raw.charAt(i), 16) << 4)
+                    + Character.digit(raw.charAt(i+1), 16));
+        }
+        return data;
     }
-
 }

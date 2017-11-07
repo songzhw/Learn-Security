@@ -1,6 +1,7 @@
 package ca.six.sec.keystore.store_value;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
@@ -69,19 +70,13 @@ public class StoreKeyDemo extends Activity {
 
 
     public void onClickSimpleButton2(View v) throws Exception {
-        // decrypt
-        SecretKey key = (SecretKey) keyStore.getKey(keyAlias, null);
-        //TODO weird!! the key.getEncoded() is null!!!! (I don't know why)
-        //            Log.d("szw", "szw " + (key == null) + " ; key04 = " + (key.getEncoded()));
-
-        final Cipher cipher = Cipher.getInstance(KeyProperties.KEY_ALGORITHM_AES + "/"
-                + KeyProperties.BLOCK_MODE_CBC + "/" + KeyProperties.ENCRYPTION_PADDING_PKCS7);
-        // Use Encrypt mode.
-        cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
-        byte[] ret = cipher.doFinal(encrypted);
-        Log.d("szw", "04-02 decrypted = " + new String(ret));
+        Intent it = new Intent(this, DecryptFromKeyStoreDemo.class);
+        it.putExtra("iv", Util.bytesToHexString(iv));
+        it.putExtra("encrypted", Util.bytesToHexString(encrypted));
+        startActivity(it);
 
     }
+
 }
 
 
