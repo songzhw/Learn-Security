@@ -18,6 +18,13 @@ import javax.crypto.spec.IvParameterSpec;
 import ca.six.sec.R;
 
 
+/*
+    TODO is it to secure to save the iv?
+
+https://stackoverflow.com/questions/3225640/how-to-decrypt-aes-cbc-with-known-iv
+https://security.stackexchange.com/questions/17044/when-using-aes-and-cbc-is-it-necessary-to-keep-the-iv-secret
+
+ */
 public class DecryptFromKeyStoreDemo extends Activity {
     private final String provider = "AndroidKeyStore";
     private final String keyAlias = "key12";
