@@ -69,6 +69,8 @@ public class StoreKeyDemo extends Activity {
         Log.d("szw", "     : iv = " + Base64.encodeToString(iv, Base64.DEFAULT));
     }
 
+    // keyStore.deleteEntry(alias);  --> So keystore can also delete one key
+
 
     public void onClickSimpleButton2(View v) throws Exception {
         Intent it = new Intent(this, DecryptFromKeyStoreDemo.class);
