@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.security.keystore.KeyProperties;
 import android.support.annotation.Nullable;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 
@@ -15,7 +16,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
 import ca.six.sec.R;
-import ca.six.sec.Util;
 
 
 public class DecryptFromKeyStoreDemo extends Activity {
@@ -39,8 +39,8 @@ public class DecryptFromKeyStoreDemo extends Activity {
 
     public void onClickSimpleButton(View v) throws Exception {
         Intent it = getIntent();
-        byte[] iv = Util.hexStringToBytes(it.getStringExtra("iv"));
-        byte[] encrypted = Util.hexStringToBytes(it.getStringExtra("encrypted"));
+        byte[] iv = Base64.decode(it.getStringExtra("iv"), Base64.DEFAULT);
+        byte[] encrypted = Base64.decode(it.getStringExtra("encrypted"), Base64.DEFAULT);
 
 
         // decrypt

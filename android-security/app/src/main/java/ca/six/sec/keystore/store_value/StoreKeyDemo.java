@@ -8,6 +8,7 @@ import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 
@@ -16,10 +17,8 @@ import java.security.KeyStore;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.IvParameterSpec;
 
 import ca.six.sec.R;
-import ca.six.sec.Util;
 
 
 public class StoreKeyDemo extends Activity {
@@ -64,18 +63,18 @@ public class StoreKeyDemo extends Activity {
         cipher.init(Cipher.ENCRYPT_MODE, key);
         encrypted = cipher.doFinal(plainText.getBytes());
         iv = cipher.getIV();
-        Log.d("szw", "03-02 encrypted = " + Util.bytesToHexString(encrypted));
-        Log.d("szw", "     : iv = " + Util.bytesToHexString(iv));
+        Log.d("szw", "03-02 encrypted = " + Base64.encodeToString(encrypted, Base64.DEFAULT));
+        Log.d("szw", "     : iv = " + Base64.encodeToString(iv, Base64.DEFAULT));
     }
 
 
     public void onClickSimpleButton2(View v) throws Exception {
         Intent it = new Intent(this, DecryptFromKeyStoreDemo.class);
-        it.putExtra("iv", Util.bytesToHexString(iv));
-        it.putExtra("encrypted", Util.bytesToHexString(encrypted));
+        it.putExtra("iv", Base64.encodeToString(iv, Base64.DEFAULT));
+        it.putExtra("encrypted", Base64.encodeToString(encrypted, Base64.DEFAULT));
         startActivity(it);
-
     }
+
 
 }
 
