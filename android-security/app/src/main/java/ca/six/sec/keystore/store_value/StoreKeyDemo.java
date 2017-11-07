@@ -22,7 +22,7 @@ import ca.six.sec.R;
 
 
 public class StoreKeyDemo extends Activity {
-    private final String plainText = "private information 2017-11";
+    private final String plainText = "0123456789abcdeqwert0123456789abcdeqwert0123456789abcdeqwert0123456789abcdeqwert0123456789abcdeqwert0123456789abcdeqwert0123456789abcdeqwert0123456789abcdeqwert";
     private final String provider = "AndroidKeyStore";
     private final String keyAlias = "key12";
 
