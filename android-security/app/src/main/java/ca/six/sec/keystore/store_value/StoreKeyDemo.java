@@ -48,6 +48,8 @@ public class StoreKeyDemo extends Activity {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void onClickSimpleButton(View v) throws Exception {
+        long start = System.currentTimeMillis();
+
         KeyGenerator keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, provider);
         int purpose = KeyProperties.PURPOSE_DECRYPT | KeyProperties.PURPOSE_ENCRYPT;
         KeyGenParameterSpec keyGenParameterSpec = new KeyGenParameterSpec.Builder(keyAlias, purpose)
@@ -67,6 +69,7 @@ public class StoreKeyDemo extends Activity {
         iv = cipher.getIV();
         Log.d("szw", "03-02 encrypted = " + Base64.encodeToString(encrypted, Base64.DEFAULT));
         Log.d("szw", "     : iv = " + Base64.encodeToString(iv, Base64.DEFAULT));
+        Log.d("szw", "       (encrypt takes time "+ (System.currentTimeMillis() - start)+" ms)");
     }
 
     // keyStore.deleteEntry(alias);  --> So keystore can also delete one key

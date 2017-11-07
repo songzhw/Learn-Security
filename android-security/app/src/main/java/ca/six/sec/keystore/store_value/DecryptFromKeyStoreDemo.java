@@ -48,6 +48,8 @@ public class DecryptFromKeyStoreDemo extends Activity {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void onClickSimpleButton(View v) throws Exception {
+        long start = System.currentTimeMillis();
+
         Intent it = getIntent();
         byte[] iv = Base64.decode(it.getStringExtra("iv"), Base64.DEFAULT);
         byte[] encrypted = Base64.decode(it.getStringExtra("encrypted"), Base64.DEFAULT);
@@ -63,6 +65,7 @@ public class DecryptFromKeyStoreDemo extends Activity {
         cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
         byte[] ret = cipher.doFinal(encrypted);
         Log.d("szw", "04-01 decrypted = " + new String(ret));
+        Log.d("szw", "       (decrypt takes time "+ (System.currentTimeMillis() - start)+" ms)");
 
     }
 
