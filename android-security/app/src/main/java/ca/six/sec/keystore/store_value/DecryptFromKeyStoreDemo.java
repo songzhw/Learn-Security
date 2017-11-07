@@ -55,8 +55,7 @@ public class DecryptFromKeyStoreDemo extends Activity {
 
         // decrypt
         SecretKey key = (SecretKey) keyStore.getKey(keyAlias, null);
-        //TODO weird!! the key.getEncoded() is null!!!! (I don't know why)
-        Log.d("szw", "szw " + (key == null) + " ; key04 = " + (key != null ? key.getEncoded() : "null"));
+//        Log.d("szw", "szw " + (key == null) + " ; key04 = " + (key != null ? key.getEncoded() : "null")); // key.getEncode is null!
 
         final Cipher cipher = Cipher.getInstance(KeyProperties.KEY_ALGORITHM_AES + "/"
                 + KeyProperties.BLOCK_MODE_CBC + "/" + KeyProperties.ENCRYPTION_PADDING_PKCS7);

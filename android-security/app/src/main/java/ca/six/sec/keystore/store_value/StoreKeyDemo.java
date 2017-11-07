@@ -22,7 +22,7 @@ import ca.six.sec.R;
 
 
 public class StoreKeyDemo extends Activity {
-    private final String plainText = "private information 2017";
+    private final String plainText = "private information 2017-11";
     private final String provider = "AndroidKeyStore";
     private final String keyAlias = "key12";
 
@@ -41,15 +41,6 @@ public class StoreKeyDemo extends Activity {
         try {
             keyStore = KeyStore.getInstance(provider);
             keyStore.load(null);
-
-            KeyGenerator keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, provider);
-            int purpose = KeyProperties.PURPOSE_DECRYPT | KeyProperties.PURPOSE_ENCRYPT;
-            KeyGenParameterSpec keyGenParameterSpec = new KeyGenParameterSpec.Builder(keyAlias, purpose)
-                    .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
-                    .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7)
-                    .build();
-            keyGenerator.init(keyGenParameterSpec);
-            key = keyGenerator.generateKey();
         } catch (Exception e) {
         }
 
@@ -57,6 +48,16 @@ public class StoreKeyDemo extends Activity {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void onClickSimpleButton(View v) throws Exception {
+        KeyGenerator keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, provider);
+        int purpose = KeyProperties.PURPOSE_DECRYPT | KeyProperties.PURPOSE_ENCRYPT;
+        KeyGenParameterSpec keyGenParameterSpec = new KeyGenParameterSpec.Builder(keyAlias, purpose)
+                .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
+                .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7)
+                .build();
+        keyGenerator.init(keyGenParameterSpec);
+        key = keyGenerator.generateKey();
+        // System.out.println("szw 03-01 generated a key : "+Base64.encodeToString(key.getEncoded(), Base64.DEFAULT)); // key.getEncoded为空, 直接crash
+
         // encrypt
         final Cipher cipher = Cipher.getInstance(KeyProperties.KEY_ALGORITHM_AES + "/"
                 + KeyProperties.BLOCK_MODE_CBC + "/" + KeyProperties.ENCRYPTION_PADDING_PKCS7);
