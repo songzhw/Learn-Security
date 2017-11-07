@@ -20,6 +20,7 @@
         </activity>
 
         <activity android:name=".device_admin.PolicySetupActivity"/>
+        <activity android:name=".keystore.store_value.DecryptFromKeyStoreDemo" />
 
         <receiver android:name=".device_admin.Policy$PolicyAdmin"
                   android:label="@string/app_policy_admin_name"

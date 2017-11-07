@@ -2,9 +2,11 @@ package ca.six.sec.keystore.store_value;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.security.keystore.KeyProperties;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +46,7 @@ public class DecryptFromKeyStoreDemo extends Activity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void onClickSimpleButton(View v) throws Exception {
         Intent it = getIntent();
         byte[] iv = Base64.decode(it.getStringExtra("iv"), Base64.DEFAULT);

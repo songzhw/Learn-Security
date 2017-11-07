@@ -55,6 +55,7 @@ public class StoreKeyDemo extends Activity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void onClickSimpleButton(View v) throws Exception {
         // encrypt
         final Cipher cipher = Cipher.getInstance(KeyProperties.KEY_ALGORITHM_AES + "/"
