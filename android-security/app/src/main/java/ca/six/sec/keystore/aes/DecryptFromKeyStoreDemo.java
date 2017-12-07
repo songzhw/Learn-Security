@@ -1,4 +1,4 @@
-package ca.six.sec.keystore.store_value;
+package ca.six.sec.keystore.aes;
 
 import android.app.Activity;
 import android.content.Intent;
