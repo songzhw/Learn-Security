@@ -1,10 +1,12 @@
 package ca.six.sec.keystore.rsa;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyInfo;
 import android.security.keystore.KeyProperties;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -25,7 +27,7 @@ import ca.six.sec.Util;
 /**
  * Created by songzhw on 2016/1/21
  */
-public class RsaKeyStoreActivity extends Activity {
+public class SimplestRsaDemo extends Activity {
     private String keyAlias = "rsa01";
     private KeyStore keyStore;
     private byte[] encrypted, iv;
@@ -54,6 +56,7 @@ public class RsaKeyStoreActivity extends Activity {
         //  error msg : "Skipped 89 frames!  The application may be doing too much work on its main thread."
         //  szw : This generation of key and the encryption should be operated out of the main thread
         new Thread(new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void run(){
                 try {
