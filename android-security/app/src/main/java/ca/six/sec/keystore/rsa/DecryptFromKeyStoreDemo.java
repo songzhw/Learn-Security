@@ -16,6 +16,9 @@ import android.widget.TextView;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.cert.Certificate;
 
 import javax.crypto.Cipher;
 
@@ -27,7 +30,7 @@ public class DecryptFromKeyStoreDemo extends Activity {
     private final String keyAlias = "key12";
 
     private KeyStore keyStore;
-    private KeyPair keyPair;
+    private PrivateKey privateKey;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +43,11 @@ public class DecryptFromKeyStoreDemo extends Activity {
             keyStore = KeyStore.getInstance(provider);
             keyStore.load(null);
 
-            keyPair = keyStore.get???(); // TODO how?????
+            Certificate cert = keyStore.getCertificate(keyAlias);
+            PublicKey publicKey = cert.getPublicKey();
+            privateKey = (PrivateKey)keyStore.getKey(keyAlias, null);
+            System.out.println("szw pub = "+publicKey+" ; pri = "+privateKey);
+
         } catch(Exception e){}
 
     }
@@ -51,7 +58,7 @@ public class DecryptFromKeyStoreDemo extends Activity {
         byte[] encrypted = Base64.decode(it.getStringExtra("encrypted"), Base64.DEFAULT);
 
         Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
-        cipher.init(Cipher.DECRYPT_MODE, keyPair.getPrivate());
+        cipher.init(Cipher.DECRYPT_MODE, privateKey);
         byte[] decrypted = cipher.doFinal(encrypted);
         System.out.println("szw RSA decrypted = "+new String(decrypted));
     }
