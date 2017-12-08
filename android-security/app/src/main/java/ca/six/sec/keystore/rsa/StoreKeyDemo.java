@@ -15,8 +15,11 @@ import android.widget.TextView;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.KeyStore;
+import java.security.spec.MGF1ParameterSpec;
 
 import javax.crypto.Cipher;
+import javax.crypto.spec.OAEPParameterSpec;
+import javax.crypto.spec.PSource;
 
 import ca.six.sec.R;
 
@@ -45,12 +48,12 @@ public class StoreKeyDemo extends Activity {
             // purpose就4个: 加密, 解密 ; sign, verify;
             int purpose = KeyProperties.PURPOSE_DECRYPT | KeyProperties.PURPOSE_ENCRYPT;
             KeyGenParameterSpec spec = new KeyGenParameterSpec.Builder(keyAlias, purpose)
-                .setDigests(KeyProperties.DIGEST_SHA256, KeyProperties.DIGEST_SHA512)
-                .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_RSA_OAEP)
-                .build();
+                    .setDigests(KeyProperties.DIGEST_SHA256, KeyProperties.DIGEST_SHA512)
+                    .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_RSA_OAEP)
+                    .build();
 
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_RSA,
-                androidKeyProvider);
+                    androidKeyProvider);
             keyPairGenerator.initialize(spec);
             keyPair = keyPairGenerator.generateKeyPair();
         } catch(Exception e){
@@ -60,12 +63,14 @@ public class StoreKeyDemo extends Activity {
 
     // encrpyt
     public void onClickSimpleButton(View v) throws Exception {
+        OAEPParameterSpec spec = new OAEPParameterSpec("SHA-256", "MGF1", new MGF1ParameterSpec("SHA-1"), PSource.PSpecified.DEFAULT);
         Cipher cipher = Cipher.getInstance(KeyProperties.KEY_ALGORITHM_RSA+"/" +
-            KeyProperties.BLOCK_MODE_ECB+"/OAEPWithSHA-256AndMGF1Padding");
-        cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPublic());
+                KeyProperties.BLOCK_MODE_ECB+"/OAEPWithSHA-256AndMGF1Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, keyPair.getPublic(), spec);
         encrypted = cipher.doFinal(plainText.getBytes());
         System.out.println("szw : RSA encrypted = "+ Base64.encodeToString(encrypted, Base64.DEFAULT));
     }
+
 
     // naviagte
     public void onClickSimpleButton2(View v){
@@ -73,5 +78,4 @@ public class StoreKeyDemo extends Activity {
         it.putExtra("encrypted", Base64.encodeToString(encrypted, Base64.DEFAULT));
         startActivity(it);
     }
-
 }
