@@ -61,6 +61,7 @@ public class RestoreKeyDemo extends Activity {
         System.out.println("szw publicKey02 = " + Base64.encodeToString(publicKey.getEncoded(), Base64.DEFAULT));
     }
 }
+
 /*
 szw publicKey01 = MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDYXrHB2Z3y8yEm+yRY8/w7bY71kjtKg5/aSQeY
 szw publicKey02 = MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDYXrHB2Z3y8yEm+yRY8/w7bY71kjtKg5/aSQeY
