@@ -38,3 +38,7 @@ proguard/
 /.gradle
 /gradlew.bat
 /gradlew
+
+
+# python
+venv/

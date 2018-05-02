@@ -85,8 +85,7 @@ public class SimplestRsaDemo extends Activity {
 
         PrivateKey privateKey = (PrivateKey) keyStore.getKey(keyAlias, null);
 
-        PublicKey publicKey = keyStore.getCertificate(keyAlias)
-                                      .getPublicKey();
+        PublicKey publicKey = keyStore.getCertificate(keyAlias).getPublicKey();
 
         Cipher cipher = Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
