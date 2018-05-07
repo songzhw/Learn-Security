@@ -1,10 +1,9 @@
 import os
 
 isAtxtExist = os.path.exists('a.txt')
-print(isAtxtExist) #=> True
 if(isAtxtExist):
     file = open('a.txt', 'r')  # "a.txt"等同于"./a.txt"
-    content = file.read()
+    content = file.read()  # read() : return all the text in the file
     print(content)
     file.close() # python会在程序结束时自动关闭所有打开的文件. 这是自己手动关.
 

@@ -35,14 +35,35 @@ def decrypt(key, msg):
     return ''.join(ret)
     # Python中没有&&, ||, 只有and, or. 可读性好些
 
+def loadDirectionary():
+    file = open("../../res/dictionary.txt", "r")
+    ret = {}
+    for word in file.read().split('\n'):
+        ret[word] = None
+    file.close()
+    return ret
+
+def isEnglish(msg):
+    ret = True
+    words = msg.split()
+    dicts = loadDirectionary()
+    for word in words:
+        if word.upper() not in dicts:
+            return False
+    return ret
 
 if __name__ == '__main__':
-    plainText = "common senses"
+    plainText = "what a day"
     key = 3
+
     encrypted = encrypt(key, plainText)
     decrypted = decrypt(key, encrypted)
+
     print("encrypted =", encrypted)
-    print("decrypted = " + decrypted)
+    print("decrypted = ", decrypted)
+    print("isDecryptedOk = ", isEnglish(decrypted))
+
+
 
     # s1 = [''] * 4
     # print("value = ", s1)  #=> ['', '', '', '']
@@ -77,4 +98,7 @@ mon
 nse
 s
 ==============
+
+decrypted =  common senses
+
 '''
