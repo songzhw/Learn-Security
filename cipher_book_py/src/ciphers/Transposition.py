@@ -70,14 +70,21 @@ if __name__ == '__main__':
     # print("value = ", s1)  #=> ['', '', '', '']
     # s2 = ['a', 'd', 'b', '32']
     # print("joined = ", ''.join(s2))  # => adb32 (最开头有个空格?!)
-    #
+
+
     # for c in "what a day":
     #     print(c)  #=> 每一个char一行
     #
     # print("ceil = ", math.ceil(10 / 3)) #=> 4
-    #
+
+
     # 格式化输出 (%d 数字, %s字符串, %r布尔)
     # print("col = %d, row = %d, char = %s, %r, %r" % (col, row, char, isLast1, isLast2))
+
+
+    # 数字的强转 : float(42) => 42.0,  int("42") => 42,  str(42.3) => "42.3"
+
+    # string.strip(): 把首尾的空白去除掉
 
 '''
 plain text = common senses, key = 3
