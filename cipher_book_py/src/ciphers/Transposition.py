@@ -15,7 +15,7 @@ def encrypt(key, msg):
 
 def decrypt(key, msg):
     length = len(msg)
-    blanStartPos = length % key  # blankCount = key - (length%key)
+    blanStartPos = length % key  # blankCount = key - (length%key)  # 此值为空, 说明没有blank的空格啊! 这里要特别注意
     rowCount = math.ceil(length / key)
     ret = [''] * rowCount  # 其实key就是columnCount
 
@@ -23,7 +23,7 @@ def decrypt(key, msg):
     col = 0
     for char in msg:
         isLast1 = row == rowCount
-        isLast2 = row == (rowCount - 1) and col >= blanStartPos
+        isLast2 = row == (rowCount - 1) and col >= blanStartPos and blanStartPos != 0
 
         if isLast1 or isLast2:
             row = 0
@@ -35,13 +35,15 @@ def decrypt(key, msg):
     return ''.join(ret)
     # Python中没有&&, ||, 只有and, or. 可读性好些
 
+
 def loadDirectionary():
     file = open("../../res/dictionary.txt", "r")
     ret = {}
     for word in file.read().split('\n'):
-        ret[word] = None
+        ret[word] = None  # None表示值的缺失. 以后用if key in hashmap, 就会返回false的
     file.close()
     return ret
+
 
 def isEnglish(msg):
     ret = True
@@ -52,8 +54,9 @@ def isEnglish(msg):
             return False
     return ret
 
+
 if __name__ == '__main__':
-    plainText = "what a day"
+    plainText = "what a good day to go out and have fun"
     key = 3
 
     encrypted = encrypt(key, plainText)
@@ -62,8 +65,6 @@ if __name__ == '__main__':
     print("encrypted =", encrypted)
     print("decrypted = ", decrypted)
     print("isDecryptedOk = ", isEnglish(decrypted))
-
-
 
     # s1 = [''] * 4
     # print("value = ", s1)  #=> ['', '', '', '']
