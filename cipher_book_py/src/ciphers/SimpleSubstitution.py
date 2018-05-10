@@ -20,14 +20,26 @@ def checkKeyIsValid(key):
 
 
 def encrypt(key, msg):
+    return translate(key, msg, 'encrypt')
+
+def decrypt(key, msg):
+    return translate(key, msg, "decrypt")
+
+def translate(key, msg, mode):
     ret = ''
+    src = SYMBOLS
+    dst = key
+    if mode == 'decrypt':
+        src, dst = dst, src
+
     for char in msg:
-        if char in SYMBOLS:
-            index = SYMBOLS.find(char)
-            ret += key[index]
+        if char in src:
+            index = src.find(char)
+            ret += dst[index]
         else:
             ret += char
     return ret
+
 
 
 if __name__ == '__main__':
@@ -36,12 +48,8 @@ if __name__ == '__main__':
 
     plainText = "what a lovely day! Have a good day."
     encrypted = encrypt(key, plainText)
+    decrypted = decrypt(key, encrypted)
 
     print("encrypted = ", encrypted)
+    print("decrypted = ", decrypted)
 
-
-    s1 = "abcd"
-    s2 = s1
-    s1 = "1234"
-    print(s1)  #=> 1234
-    print(s2)  #=> abcd
