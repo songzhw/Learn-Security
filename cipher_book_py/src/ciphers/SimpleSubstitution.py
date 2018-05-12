@@ -5,8 +5,8 @@ SYMBOLS = "abcdefghijklmnopqrstuvwxyz ,.!?"
 
 
 def getRandomKey():
-    tmp = list(SYMBOLS)
-    random.shuffle(tmp)
+    tmp = list(SYMBOLS)  # "abcd", 经过list()后, 变成['a','b','c','d']列表
+    random.shuffle(tmp)  # 随机shuffle列表
     return ''.join(tmp)
 
 
@@ -50,6 +50,6 @@ if __name__ == '__main__':
     encrypted = encrypt(key, plainText)
     decrypted = decrypt(key, encrypted)
 
-    print("encrypted = ", encrypted)
-    print("decrypted = ", decrypted)
+    print("encrypted = ", encrypted) #=> encrypted =  dnp,zpze.yterzuprczHpytzpzq..uzuprm
+    print("decrypted = ", decrypted) #=> decrypted =  what a lovely day! Have a good day.
 
