@@ -62,7 +62,7 @@ if __name__ == '__main__':
     encrypted = encrypt(key, plainText)
     decrypted = decrypt(key, encrypted)
 
-    print("encrypted =", encrypted)
+    print("encrypted = ", encrypted)
     print("decrypted = ", decrypted)
     print("isDecryptedOk = ", isEnglish(decrypted))
 
