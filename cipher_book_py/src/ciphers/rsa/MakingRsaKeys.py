@@ -1,4 +1,4 @@
-import random
+import random, os, sys
 
 from ciphers.math.rabinMiller import generateLargePrime
 from ciphers.math.cmath import mi
@@ -26,7 +26,23 @@ def generateRsaKeys(keySize):
     return (publicKey, privateKey)
 
 
+def saveKeysAsFiles(fileNamePrefix, keySize):
+    pubFile = "%s_public.txt" % (fileNamePrefix)
+    priFile = "%s_private.txt" % (fileNamePrefix)
+    if os.path.exists(pubFile) or os.path.exists(priFile):
+        sys.exit("The secret key files already exists! Please be careful!!")
+
+    pub, pri = generateRsaKeys(keySize)
+
+    fout = open(pubFile, 'w')
+    fout.write("%s,%s,%s" % (keySize, pub[0], pub[1]))
+    fout.close()
+
+    fout = open(priFile, 'w')
+    fout.write("%s,%s,%s" % (keySize, pri[0], pri[1]))
+    fout.close()
+
+
+
 if __name__ == '__main__':
-    pub, pri = generateRsaKeys(1024)
-    print("public  = ", pub)
-    print("private = ", pri)
+    saveKeysAsFiles("rsa01", 1025)
