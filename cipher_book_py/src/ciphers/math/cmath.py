@@ -7,7 +7,7 @@ def gcd(a, b):
         a, b = b % a, a
     return b
 
-
+# modular inverse
 def mi(a, m):
     if gcd(a, m) != 1:
         return None
