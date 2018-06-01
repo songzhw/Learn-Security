@@ -24,8 +24,8 @@ def getBlocksFromPlainText(msg, blockSize = DEFAULT_BLOCK_SIZE):
         block = 0
         end = min(blockStart + blockSize, msgBytesLen)
         for i in range(blockStart, end):
-            right = BYTE_SIZE ** (i % blockSize)
-            block += msgBytes[i] * right
+            blockInt = BYTE_SIZE ** (i % blockSize)
+            block += msgBytes[i] * blockInt
         blocks.append(block)
     return blocks
 
